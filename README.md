@@ -22,7 +22,7 @@ import { FixedScrollFC } from 'fixed-scroll'
 
 import React, { useEffect, useRef } from 'react'
 import { render } from 'react-dom'
-import { FixedScrollFC } from '../../src'
+import { FixedScrollFC } from 'fixed-scroll'
 
 const App = () => {
   return (
@@ -41,9 +41,9 @@ const App = () => {
   )
 }
 render(<App />, document.getElementById('root'))
-
 ```
 
-// height: number, 容器有多高
-// contents: [<>, <>], 一个个组件
-// 现在是平均分配原则，以后可以拓展
+| props    | value | explain          | require |
+| -------- | ----- | ---------------- | ------- |
+| height   | 1000  | px               | true    |
+| contents | []    | Components Array | true    |
