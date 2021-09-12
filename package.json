@@ -12,6 +12,7 @@
     "build": "webpack --mode production",
     "deploy": "gh-pages -d examples/dist",
     "compile": "npx babel src --out-dir lib",
+    "publish": "npm publish",
     "publish-demo": "npm run build && npm run deploy"
   },
   "repository": {

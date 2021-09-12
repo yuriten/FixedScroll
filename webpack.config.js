@@ -13,6 +13,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'example/dist'),
     filename: 'bundle.js',
+    libraryTarget: 'umd', // 采用通用模块定义
+    libraryExport: 'default', // 兼容 ES6 的模块系统、CommonJS 和 AMD 模块规范
   },
   module: {
     rules: [
