@@ -13,3 +13,4 @@ package-lock.json
 build/main/lib/auth/index.spec.js
 src/test.ts
 lib
+yarn.lock

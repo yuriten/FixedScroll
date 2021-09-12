@@ -1,8 +1,11 @@
 {
   "name": "fixed-scroll",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "fixed-scroll is a fixed scrolling React library, based on which you can easily write wonderful scroll animation effects",
-  "main": "index.js",
+  "main": "./src/index.js",
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
