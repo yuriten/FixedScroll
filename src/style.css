@@ -1,18 +1,11 @@
+body {
+  overflow: hidden;
+}
 .FS-background-container {
   width: 100vw;
   display: flex;
 }
 
-.FS-left {
-  background-image: linear-gradient(white, pink);
-  width: 300px;
-  height: 100%;
-}
-.FS-right {
-  background-image: linear-gradient(white, cadetblue);
-  width: 500px;
-  height: 100%;
-}
 .FS-foreground-container {
   position: fixed;
   top: 0;
@@ -21,6 +14,17 @@
   width: 100vw;
 }
 
+.FS-left {
+  background-image: linear-gradient(white, pink);
+  width: 300px;
+  height: 100%;
+}
+
+.FS-right {
+  background-image: linear-gradient(white, cadetblue);
+  width: 500px;
+  height: 100%;
+}
 @keyframes downIn {
   from {
     transform: translate(0, 5%);
@@ -45,4 +49,46 @@
 
 .FS-none {
   display: none;
+}
+
+.K-background-container {
+  width: 100vw;
+  display: flex;
+}
+
+.K-foreground-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.K-foreground-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.3s;
+}
+.full {
+  width: 100%;
+  height: 100%;
+}
+.page1 {
+  /* background: rgba(20, 20, 20, 0.1); */
+
+  background: gainsboro;
+}
+
+.page2 {
+  /* background: rgba(20, 20, 20, 0.3); */
+  background: gray;
+}
+.page3 {
+  /* background: rgba(20, 20, 20, 0.5); */
+  background: blanchedalmond;
 }

@@ -31,7 +31,9 @@ const range = (number, length) => {
 }
 
 const FixedScroll = (props, ref) => {
-  // let { height, slice } = props
+  // props:
+  // contents 内容，[div, div, div]
+  // height 高度（只在 mode=distance时生效）
 
   const [step, setStep] = useState(1)
   const [percentageTop, setPercentageTop] = useState(0)
@@ -72,10 +74,11 @@ const FixedScroll = (props, ref) => {
     <div className='FS-container'>
       <div className='FS-background-container' style={{ height: props.height }}>
         {range(props.contents.length, props.height).map((i) => {
-          return <div id={i.id} key={i.id} style={{ height: i.height }}></div>
+          return <section id={i.id} key={i.id} style={{ height: i.height }}></section>
         })}
         <div className='FS-left'></div>
         <div className='FS-right'></div>
+
       </div>
 
       {/* 前景，相当于给一个 abslute */}

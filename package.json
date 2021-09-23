@@ -1,18 +1,17 @@
 {
   "name": "fixed-scroll",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "fixed-scroll is a fixed scrolling React library, based on which you can easily write wonderful scroll animation effects",
   "main": "./src/index.js",
   "files": [
     "/lib"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "deploy": "gh-pages -d examples/dist",
-    "compile": "npx babel src --out-dir lib",
-    "publish": "npm publish",
+    "compile": "npx babel src --out-dir lib --copy-files",
+    "publish": "yarn compile && npm publish",
     "publish-demo": "npm run build && npm run deploy"
   },
   "repository": {
