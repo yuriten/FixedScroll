@@ -21,15 +21,6 @@ const App = () => {
       style={{ height: '100%' }}
       // onClick={() => console.log('基于事件查看方案', cr.current.percentageTop)}
     >
-      {/* <FixedScrollFC
-        ref={cr}
-        height={10000}
-        contents={[
-          <section className=''>Step1</section>,
-          <section className=''>Step2</section>,
-          <section className=''>Step3</section>,
-        ]}
-      /> */}
 
       <Keynote
         contents={[
