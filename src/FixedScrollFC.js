@@ -1,10 +1,9 @@
 import React, { forwardRef, useState, useEffect, useImperativeHandle } from 'react'
 import './style.css'
 
-const getTopPer = (e, height) => {
-  let dom = e.target.documentElement
+const getTopPer = (dom, height) => {
   // let distance = dom.scrollTop;
-  let containerCut = height - dom.clientHeight
+  let containerCut = height - dom.clientHeight // 窗口长度
   // console.log('e', e)
 
   // 声明 DTD：
@@ -37,6 +36,7 @@ const FixedScroll = (props, ref) => {
 
   const [step, setStep] = useState(1)
   const [percentageTop, setPercentageTop] = useState(0)
+  const [topDistance, setTopDistance] = useState(0)
 
   // 主要作用：
   // 1，传入一个固定高度和分片数量
@@ -44,17 +44,22 @@ const FixedScroll = (props, ref) => {
   // 3，暴露一组属性、方法让外部可获取内部 Value
 
   useImperativeHandle(ref, () => {
-    return { percentageTop: percentageTop }
+    return {
+      step: step,
+      percentageTop: percentageTop, //距离顶部百分比
+      topDistance: topDistance, // 距离顶部距离
+    }
   })
 
   useEffect(() => {
     const onScroll = (e) => {
-      let p = getTopPer(e, props.height)
-      // console.log('距离顶部百分比', p)
+      let dom = e.target.documentElement
+      let p = getTopPer(dom, props.height)
       let yiff = 1 / props.contents.length // 一份
       let ff = Math.ceil(p / yiff) // 向上取整
       setStep(ff === 0 ? 1 : ff) // 但 0 就视为 1
       setPercentageTop(p)
+      setTopDistance(dom.scrollTop)
     }
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
@@ -78,7 +83,6 @@ const FixedScroll = (props, ref) => {
         })}
         <div className='FS-left'></div>
         <div className='FS-right'></div>
-
       </div>
 
       {/* 前景，相当于给一个 abslute */}

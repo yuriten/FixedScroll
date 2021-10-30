@@ -21,8 +21,16 @@ const App = () => {
       style={{ height: '100%' }}
       // onClick={() => console.log('基于事件查看方案', cr.current.percentageTop)}
     >
+      {/* <Keynote
+        contents={[
+          <div className='full page1'>page1</div>,
+          <div className='full page2'>page2</div>,
+          <div className='full page3'>page3</div>,
+        ]}
+      /> */}
 
-      <Keynote
+      <FixedScrollFC
+        height={3000}
         contents={[
           <div className='full page1'>page1</div>,
           <div className='full page2'>page2</div>,
