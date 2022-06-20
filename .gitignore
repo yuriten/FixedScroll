@@ -7,3 +7,6 @@ package-lock.json
 .env
 lib
 yarn.lock
+
+.DS_Store
+trash/
