@@ -1,6 +1,9 @@
 body {
   /* overflow: hidden; */
 }
+.FS-foreground-container{
+  border: 2px solid black;
+}
 .FS-background-container {
   width: 100vw;
   display: flex;

@@ -26,18 +26,16 @@ import { FixedScrollFC } from 'fixed-scroll'
 
 const App = () => {
   return (
-    <div
-      style={{ height: '100%' }}
-    >
-      <FixedScrollFC
-        height={10000}
-        contents={[
-          <h1 className=''>Step1</h1>,
-          <h1 className=''>Step2</h1>,
-          <h1 className=''>Step3</h1>,
-        ]}
-      />
-    </div>
+    <FixedScrollFC
+      containerHeight={500}
+      insideHeight={10000}
+      contents={[
+        <div style={{ background: '#333', width: 300, height: 300 }}>1</div>,
+        <div style={{ background: '#666', width: 300, height: 300 }}>2</div>,
+        <div style={{ background: '#999', width: 300, height: 300 }}>3</div>,
+        <div style={{ background: '#ddd', width: 300, height: 300 }}>4</div>,
+      ]}
+    />
   )
 }
 render(<App />, document.getElementById('root'))

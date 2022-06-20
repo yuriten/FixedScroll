@@ -16,23 +16,14 @@ const getTopPer = (dom, height) => {
   return p
 }
 
-const range = (number, length) => {
-  let list = []
-  let i = 1
-  while (i <= number) {
-    list.push({
-      id: `FS-step${i}`,
-      height: length / number,
-    })
-    i += 1
-  }
-  return list
-}
-
-const FixedScroll = (props, ref) => {
-  // props:
-  // contents 内容，[div, div, div]
-  // height 高度（只在 mode=distance时生效）
+const FixedScroll = forwardRef((props, ref) => {
+  let {
+    height, // height 高度（只在 mode=distance时生效）
+    contents, // contents 内容，[div, div, div]
+    scrollHeight,
+    containerHeight,
+    background,
+  } = props
 
   const [step, setStep] = useState(1)
   const [percentageTop, setPercentageTop] = useState(0)
@@ -54,8 +45,8 @@ const FixedScroll = (props, ref) => {
   useEffect(() => {
     const onScroll = (e) => {
       let dom = e.target.documentElement
-      let p = getTopPer(dom, props.height)
-      let yiff = 1 / props.contents.length // 一份
+      let p = getTopPer(dom, height)
+      let yiff = 1 / contents.length // 一份
       let ff = Math.ceil(p / yiff) // 向上取整
       setStep(ff === 0 ? 1 : ff) // 但 0 就视为 1
       setPercentageTop(p)
@@ -65,39 +56,38 @@ const FixedScroll = (props, ref) => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [step])
 
-  // let guideScrollTo = (target) => {
-  //   setCanScroll(true)
-  //   setTimeout(() => {
-  //     let anchorElement = document.getElementById(target)
-  //     if (anchorElement) {
-  //       anchorElement.scrollIntoView({ behavior: 'smooth' })
-  //     }
-  //   }, 200)
-  // }
-
+  let containerH = containerHeight ? containerHeight : '100vh'
   return (
-    <div className='FS-container'>
-      <div className='FS-background-container' style={{ height: props.height }}>
-        {range(props.contents.length, props.height).map((i) => {
-          return <section id={i.id} key={i.id} style={{ height: i.height }}></section>
-        })}
-        <div className='FS-left'></div>
-        <div className='FS-right'></div>
-      </div>
-
-      {/* 前景，相当于给一个 abslute */}
-      <div className='FS-foreground-container'>
-        {props.contents.map((con, index) => {
-          let none = step !== index + 1 ? ' FS-none ' : ''
-          return (
-            <div key={index} className={'FS-foreground-item' + none}>
-              {con}
-            </div>
-          )
-        })}
+    <div
+      className='FS-bg'
+      onScrollCapture={(e) => {
+        let top = e.target.scrollTop
+        let p = top / scrollHeight
+        if (p >= 1) {
+          p = 1
+        }
+        let yiff = 1 / contents.length // 一份
+        let ff = Math.ceil(p / yiff) // 向上取整
+        setStep(ff === 0 ? 1 : ff) // 但 0 就视为 1
+        setPercentageTop(p)
+        setTopDistance(top)
+      }}
+      style={{ height: containerH, overflowY: 'auto' }}
+    >
+      <div className='FS-fg' style={{ height: scrollHeight, background: background }}>
+        <div className='FS-abs' style={{ position: 'absolute' }}>
+          {contents.map((con, index) => {
+            let none = step !== index + 1 ? ' FS-none ' : ''
+            return (
+              <div key={index} className={'FS-foreground-item' + none}>
+                {con}
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
-}
+})
 
-export default forwardRef(FixedScroll)
+export default FixedScroll

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { render } from 'react-dom'
-import { FixedScrollFC, Keynote } from '../../src'
+import { FixedScrollFC } from '../../src'
 
 const App = () => {
   const cr = useRef()
@@ -15,26 +15,19 @@ const App = () => {
     // return () => window.removeEventListener('scroll', onScroll)
   }, [step])
 
-  // console.log('step', step)
+  let bg =
+    'https://images.unsplash.com/photo-1640746122832-851abed18527?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
   return (
-    <div
-      style={{ height: '100%' }}
-      // onClick={() => console.log('基于事件查看方案', cr.current.percentageTop)}
-    >
-      {/* <Keynote
-        contents={[
-          <div className='full page1'>page1</div>,
-          <div className='full page2'>page2</div>,
-          <div className='full page3'>page3</div>,
-        ]}
-      /> */}
-
+    <div>
       <FixedScrollFC
-        height={3000}
+        scrollHeight={4000}
+        // containerHeight={500}
+        // background={`url(${bg})`}
         contents={[
-          <div className='full page1'>page1</div>,
-          <div className='full page2'>page2</div>,
-          <div className='full page3'>page3</div>,
+          <div style={{ background: '#333', width: 400, height: 300 }}>1</div>,
+          <div style={{ background: '#666', width: 400, height: 300 }}>2</div>,
+          <div style={{ background: '#999', width: 400, height: 300 }}>3</div>,
+          <div style={{ background: '#ddd', width: 400, height: 300 }}>4</div>,
         ]}
       />
     </div>

@@ -2,6 +2,8 @@
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 分析包内容
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.join(__dirname, './example/src/index.html'),
@@ -29,7 +31,12 @@ module.exports = {
       },
     ],
   },
-  plugins: [htmlWebpackPlugin],
+
+  plugins: [
+    htmlWebpackPlugin,
+    // 开启分析
+    // new BundleAnalyzerPlugin(),
+  ],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
