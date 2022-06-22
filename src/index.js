@@ -1,3 +1,4 @@
-import FixedScrollFC from './FixedScrollFC'
+import ParallaxFC from './ParallaxFC'
+import KeynoteFC from './KeynoteFC'
 
-export { FixedScrollFC }
+export { ParallaxFC, KeynoteFC }
