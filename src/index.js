@@ -1,4 +1,4 @@
+import ParallaxFCOld from './ParallaxFC.old'
 import ParallaxFC from './ParallaxFC'
-import KeynoteFC from './KeynoteFC'
 
-export { ParallaxFC, KeynoteFC }
+export { ParallaxFC, ParallaxFCOld }

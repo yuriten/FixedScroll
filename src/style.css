@@ -7,7 +7,10 @@ body {
 .FS-background-container {
   width: 100vw;
   display: flex;
+  position: sticky;
 }
+
+
 
 .FS-foreground-container {
   position: fixed;
@@ -94,9 +97,10 @@ body {
 .page3 {
   /* background: rgba(20, 20, 20, 0.5); */
   background: blanchedalmond;
+  /* background-image: url(); */
 }
 
-.keynote-item {
+/* .keynote-item {
   width: 100%;
   height: 300px;
   display: flex;
@@ -104,4 +108,4 @@ body {
   align-items: center;
   border: 2px solid black;
   flex-direction: column;
-}
+} */
