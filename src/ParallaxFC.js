@@ -36,7 +36,7 @@ const StickySection = (props) => {
     >
       <div
         style={{
-          top: top,
+          top: top ? top : 0,
           position: 'sticky',
           overflow: 'hidden',
         }}

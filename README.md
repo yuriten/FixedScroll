@@ -1,5 +1,5 @@
 
-> version 2022.06.21
+> version 2022.08.11
 
 ## Install
 
@@ -12,12 +12,13 @@ yarn add fixed-scroll
 
 ## Import
 ```javascript
-// 目前提供函数式组件以供使用，未来可能提供 Components 
-import { FixedScrollFC } from 'fixed-scroll'
+// 目前提供函数式组件(FC)，未来可能提供 Class Components
+import { ParallaxFC } from 'fixed-scroll'
 ```
 
 
-## Use
+## 使用范例
+用文字解释动画效果有些辛苦，请复制范例代码或查看图片
 ```javascript
 
 import React, { useEffect, useRef } from 'react'
@@ -26,15 +27,39 @@ import { FixedScrollFC } from 'fixed-scroll'
 
 const App = () => {
   return (
-    <FixedScrollFC
-      containerHeight={500}
-      insideHeight={10000}
-      contents={[
-        <div style={{ background: '#333', width: 300, height: 300 }}>1</div>,
-        <div style={{ background: '#666', width: 300, height: 300 }}>2</div>,
-        <div style={{ background: '#999', width: 300, height: 300 }}>3</div>,
-        <div style={{ background: '#ddd', width: 300, height: 300 }}>4</div>,
-      ]}
+    <ParallaxFC.Container
+      render={(distance) => {
+        return (
+          <>
+            <ParallaxFC.StickySection // StickySection 块的内容会以某种方式固定在屏幕上
+              distance={distance} //必须将 distance 传入内部
+              scrollRange='500vh' // 滚动高度范围，表示这个区域要滚动多长才会结束，传入一个 数字或 css高度单位
+              top={0} // 距离顶部的距离，传入一个 数字或 css高度单位
+              // render 是必须传入的要渲染的内容
+              // percentage 表示元素当前滚动的百分比，由内部自动计算得来
+              // 元素内部通过这个百分比来构建动画
+              render={(percentage) => {
+                return (
+                  <div style={{ background: 'lightgray' }}>百分比 {percentage}</div>
+                )
+              }}
+            />
+            <section style={{ padding: 200, background: 'gray', color: 'white' }}>
+              Spacer Section 这是一个正常的 html 元素，行为和普通元素没有区别。
+            </section>
+            <ParallaxFC.StickySection // 第二个需要固定的内容
+              distance={distance}
+              top={0}
+              scrollRange='500vh'
+              render={(percentage) => {
+                return (
+                  <div style={{ background: 'lightgray' }}>第二项百分比 {percentage}</div>
+                )
+              }}
+            />
+          </>
+        )
+      }}
     />
   )
 }
@@ -43,29 +68,20 @@ render(<App />, document.getElementById('root'))
 
 ## Props
 
-| propName            | example              | explain          | require |
-| ------------------- | -------------------- | ---------------- | ------- |
-| contentHeight       | 1000                 | number & string  | true    |
-| height              | 50vh                 | number & string  | true    |
-| contents            | []                   | Components Array | true    |
-| backgroundClassName | pink                 | string           | false   |
-| backgroundStyle     | {{backgound:"pink"}} | CSSProperties    | false   |
-| 设置动画方向        | ?                    | ?                | false   |
+### ParallaxFC.Container
+| propName | example             | explain                                     | require |
+| -------- | ------------------- | ------------------------------------------- | ------- |
+| render   | (distance) => <></> | 传入 react 函数组件，暴露一个 distance 参数 | true    |
 
 
-### contentHeight
-内容高度，也就是可滚动高度，通常是一个很大的数字，远大于用户屏幕能展示的高度，设置
 
-### height
-容器视口的高度，设置后会限制 contentHeight 的内容在 height 的范围内滚动，通常是一个很小的数字。这个属性会强制覆盖掉 css 设置的高度。
+### ParallaxFC.StickySection
+StickySection 块的内容会以某种方式固定在屏幕上，在代码里必须被放置在 Container 的 render 中，否则不起作用。
+| propName    | example               | explain                                                                                    | require |
+| ----------- | --------------------- | ------------------------------------------------------------------------------------------ | ------- |
+| distance    | distance              | 将 container render 函数中的 distance 参数传下去即可                                       | true    |
+| render      | (percentage) => <></> | 传入 react 函数组件，percentage 指当前滚动的百分比，取值范围通常是 0 - 1，但也可能出现负数 | true    |
+| scrollRange | 500vh                 | 滚动高度范围，表示这个区域要滚动多长才会结束，传入一个数字或 css 高度                      | false   |
+| top         | 0                     | 距离顶部的距离，传入一个数字或 css 高度                                                    | false   |
 
-### contents
-一组由元素构成的数组，通常来说，他们会均分掉 contentHeight：
-  - 如果传了 3 个元素，那么每个元素的高度就是 1/3 contentHeight
-  - 如果传了 4 个元素，那么每个元素的高度就是 1/4 contentHeight
-  
-内部的切换是自动完成的。
-
-### backgroundClassName && backgroundStyle
-用于设置容器的样式
 

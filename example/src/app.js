@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useRef } from 'react'
 import { render } from 'react-dom'
 import { ParallaxFC } from '../../src'
 
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div>
       {/* 复杂版本的理想使用方式3 */}
-      <ParallaxFC.Container
+      {/* <ParallaxFC.Container
         render={(distance) => {
           return (
             <>
@@ -114,6 +114,41 @@ const App = () => {
               <section className='' style={{ height: 1000, background: 'gray' }}>
                 Spacer Section
               </section>
+            </>
+          )
+        }}
+      /> */}
+
+      <ParallaxFC.Container
+        render={(distance) => {
+          return (
+            <>
+              <ParallaxFC.StickySection // StickySection 块的内容会以某种方式固定在屏幕上
+                distance={distance} //必须将 distance 传入内部
+                top={0} // 距离顶部的距离，传入一个 数字或 css高度单位
+                scrollRange='500vh' // 滚动高度范围，表示这个区域要滚动多长才会结束，传入一个 数字或 css高度单位
+                // render 是必须传入的要渲染的内容
+                // percentage 表示元素当前滚动的百分比，由内部自动计算得来
+                // 元素内部通过这个百分比来构建动画
+                render={(percentage) => {
+                  return (
+                    <div style={{ background: 'lightgray' }}>元素的滚动百分比：{percentage}</div>
+                  )
+                }}
+              />
+              <section style={{ padding: 200, background: 'gray', color: 'white' }}>
+                Spacer Section 这是一个正常的 html 元素，行为和普通元素没有区别。
+              </section>
+              <ParallaxFC.StickySection // 第二个需要固定的内容
+                distance={distance}
+                top={0}
+                scrollRange='500vh'
+                render={(percentage) => {
+                  return (
+                    <div style={{ background: 'lightgray' }}>元素的滚动百分比2：{percentage}</div>
+                  )
+                }}
+              />
             </>
           )
         }}
